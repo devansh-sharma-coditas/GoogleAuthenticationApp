@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url : jdbc:mysql://localhost:3306/practice_database?createDatabaseIfNotExist=true
+    username : root
+    password : 1111
+  #    driverClassName: org.postgresql.Driver
+  jpa:
+    show.sql : true
+    hibernate.ddl-auto : update
+    properties.hibernate.dialect : org.hibernate.dialect.MySQL8Dialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          #google working
+          google:
+            client-id:
+            client-secret:
+          #github working
+          github:
+            client-id:
+            client-secret:
+          #facebook
+          facebook:
+            client-id:
+            client-secret:
+              
+  #secert_key
+secret:
+  key: secret1
+
+server.port: 8080
