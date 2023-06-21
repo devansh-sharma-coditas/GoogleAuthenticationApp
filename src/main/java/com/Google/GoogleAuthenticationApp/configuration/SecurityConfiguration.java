@@ -16,7 +16,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .oauth2Login()
                 .successHandler((request, response, authentication) -> {
-                    response.sendRedirect("/register");
+                    response.sendRedirect("/response");
                 })
                 .failureHandler(((request, response, exception) -> {
                     response.sendRedirect("/loginPage.html");

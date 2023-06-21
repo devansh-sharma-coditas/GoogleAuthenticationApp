@@ -1,6 +1,7 @@
 package com.Google.GoogleAuthenticationApp.service.serviceImpl;
 
 import com.Google.GoogleAuthenticationApp.entities.UserInfo;
+import com.Google.GoogleAuthenticationApp.model.requestDto.RegisterRequestDto;
 import com.Google.GoogleAuthenticationApp.model.responseDto.CustomResponse;
 import com.Google.GoogleAuthenticationApp.repository.UserRepository;
 import com.Google.GoogleAuthenticationApp.service.UserService;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
     @Override
-    public CustomResponse registerUser(OAuth2AuthenticationToken authenticationToken) throws JsonProcessingException {
+    public CustomResponse registerUserToDB(OAuth2AuthenticationToken authenticationToken) throws JsonProcessingException {
         Gson gson = new Gson();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(gson.toJson(authenticationToken));
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
                 user.setFirstName(node.get("principal").get("attributes").get("given_name").textValue());
                 user.setLastName(node.get("principal").get("attributes").get("family_name").textValue());
                 user.setLoginVia("GOOGLE");
-            } else if (node.get("authorizedClientRegistrationId").textValue().equalsIgnoreCase("github")) {
+            } else if (loginVia.equalsIgnoreCase("github")) {
                 user = new UserInfo();
                 user.setEmail(node.get("principal").get("attributes").get("email").textValue());
                 user.setProfilePath(node.get("principal").get("attributes").get("avatar_url").textValue());
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
                 user.setFirstName(node.get("principal").get("attributes").get("name").textValue().split(" ")[0]);
                 user.setLastName("NOT FOUND ");
 
-            } else if (node.get("authorizedClientRegistrationId").textValue().equalsIgnoreCase("facebook")) {
+            } else if (loginVia.equalsIgnoreCase("facebook")) {
                 user = new UserInfo();
 //                 facebook don't provide email
 //                 for now using principal.attributes.id as email because email can't be null

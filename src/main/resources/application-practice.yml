@@ -15,17 +15,19 @@ spring:
         registration:
           #google working
           google:
-            client-id:
-            client-secret:
+            client-id: 199235572686-9ae1tg2rlecvb9rbcle4dnt3m0s0811i.apps.googleusercontent.com
+            client-secret: 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
           #github working
           github:
-            client-id:
-            client-secret:
+            client-id: Iv1.caf6051282fe18c7
+            client-secret: 0eda88d969daaae506943f982489debf089791a2
           #facebook
           facebook:
-            client-id:
-            client-secret:
-              
+            client-id: 824709145880605
+            client-secret: 70805da6a34d000df1c13df16ddaf481
+            scope:
+              - email
+              - public_profile
   #secert_key
 secret:
   key: secret1
